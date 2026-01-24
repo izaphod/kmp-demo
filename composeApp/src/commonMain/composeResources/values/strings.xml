@@ -1,0 +1,4 @@
+<resources>
+    <string name="movie_rating_source">КиноПоиск</string>
+    <string name="movie_year">%s год</string>
+</resources>

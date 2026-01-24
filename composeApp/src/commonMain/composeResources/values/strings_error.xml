@@ -1,0 +1,8 @@
+<resources>
+    <string name="error_browser_not_installed">Для выполнения действия необходимо установить веб-браузер</string>
+    <string name="error_network_io">Отсутствует интернет-соединение</string>
+    <string name="error_network_parsing">Не удалось распознать ответ от сервера</string>
+    <string name="error_network_timeout">Время ожидания от сервера истекло</string>
+    <string name="error_network_server">Ошибка сервера</string>
+    <string name="error_network_unknown">Неизвестная ошибка</string>
+</resources>
