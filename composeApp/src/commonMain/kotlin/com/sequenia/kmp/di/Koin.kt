@@ -8,5 +8,6 @@ fun appKoinConfiguration() = koinConfiguration {
         dataSourcesModule,
         repositoriesModule,
         modelsModule,
+        viewModelsModule,
     )
 }

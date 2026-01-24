@@ -1,4 +1,4 @@
-package ru.sequenia.test.domain.entities.results
+package com.sequenia.kmp.domain.results
 
 import com.sequenia.kmp.data.network.ApplicationThrowable
 import ru.sequenia.test.domain.entities.error.ErrorData

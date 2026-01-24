@@ -4,7 +4,7 @@ import com.sequenia.kmp.data.data_sources.movies.MoviesDataSource
 import com.sequenia.kmp.data.network.ApiRequestExecutor
 import com.sequenia.kmp.domain.entities.movie.Movie
 import com.sequenia.kmp.domain.repositories.movies.MoviesRepository
-import ru.sequenia.test.domain.entities.results.ExecutionResult
+import com.sequenia.kmp.domain.results.ExecutionResult
 
 class MoviesRepositoryImpl(
     private val apiRequestExecutor: ApiRequestExecutor,

@@ -3,7 +3,7 @@ package com.sequenia.kmp.presentation.compose.extension
 import androidx.compose.runtime.Composable
 import com.sequenia.kmp.presentation.extensions.defineStringResource
 import org.jetbrains.compose.resources.stringResource
-import ru.sequenia.test.domain.entities.results.ExecutionResult
+import com.sequenia.kmp.domain.results.ExecutionResult
 
 @Composable
 fun ExecutionResult.Error.defineMessage(): String {

@@ -4,7 +4,7 @@ import kotlinx.serialization.json.Json
 import com.sequenia.kmp.data.entities.response.ErrorResponse
 import com.sequenia.kmp.data.entities.error.HTTPErrorData
 import ru.sequenia.test.domain.entities.error.ErrorData
-import ru.sequenia.test.domain.entities.results.ExecutionResult
+import com.sequenia.kmp.domain.results.ExecutionResult
 
 class ApiRequestExecutor(
     private val networkRequestExecutor: NetworkRequestExecutor,

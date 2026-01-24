@@ -12,6 +12,7 @@ import com.sequenia.kmp.domain.models.settings.SettingsModel
 import com.sequenia.kmp.domain.models.settings.SettingsModelImpl
 import com.sequenia.kmp.domain.repositories.movies.MoviesRepository
 import com.sequenia.kmp.domain.repositories.settings.SettingsRepository
+import com.sequenia.kmp.presentation.screens.movies.MoviesViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -20,7 +21,9 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
+import ru.sequenia.test.ui.screens.settings.SettingsViewModel
 
 val networkModule = module {
     single {
@@ -90,6 +93,21 @@ val modelsModule = module {
     factory<SettingsModel> {
         SettingsModelImpl(
             settingsRepository = get()
+        )
+    }
+}
+
+val viewModelsModule = module {
+    viewModel {
+        MoviesViewModel(
+            moviesModel = get(),
+            settingsModel = get(),
+        )
+    }
+
+    viewModel {
+        SettingsViewModel(
+            settingsModel = get()
         )
     }
 }

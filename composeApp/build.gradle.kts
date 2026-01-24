@@ -46,6 +46,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.compose.viewmodel.navigation)
 
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
@@ -56,6 +57,10 @@ kotlin {
 
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+
+            implementation(libs.jetbrains.navigation3.ui)
+            implementation(libs.jetbrains.material3.adaptiveNavigation3)
+            implementation(libs.jetbrains.lifecycle.viewmodelNavigation3)
         }
 
         androidMain.dependencies {
