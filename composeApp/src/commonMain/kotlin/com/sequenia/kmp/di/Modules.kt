@@ -5,9 +5,13 @@ import com.sequenia.kmp.data.data_sources.movies.MoviesDataSourceRemoteImpl
 import com.sequenia.kmp.data.network.ApiRequestExecutor
 import com.sequenia.kmp.data.network.NetworkRequestExecutor
 import com.sequenia.kmp.data.repositories.movies.MoviesRepositoryImpl
+import com.sequenia.kmp.data.repositories.settings.SettingsRepositoryImpl
 import com.sequenia.kmp.domain.models.movies.MoviesModel
 import com.sequenia.kmp.domain.models.movies.MoviesModelImpl
+import com.sequenia.kmp.domain.models.settings.SettingsModel
+import com.sequenia.kmp.domain.models.settings.SettingsModelImpl
 import com.sequenia.kmp.domain.repositories.movies.MoviesRepository
+import com.sequenia.kmp.domain.repositories.settings.SettingsRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -70,12 +74,22 @@ val repositoriesModule = module {
             moviesDataSource = get()
         )
     }
+
+    single<SettingsRepository> {
+        SettingsRepositoryImpl()
+    }
 }
 
 val modelsModule = module {
     factory<MoviesModel> {
         MoviesModelImpl(
             moviesRepository = get()
+        )
+    }
+
+    factory<SettingsModel> {
+        SettingsModelImpl(
+            settingsRepository = get()
         )
     }
 }
