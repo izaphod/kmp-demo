@@ -1,7 +1,6 @@
 package com.sequenia.kmp.presentation.navigation.routes
 
 import androidx.navigation3.runtime.NavKey
-import com.sequenia.kmp.domain.entities.movie.Movie
 import com.sequenia.kmp.presentation.navigation.bottom.BottomNavItem
 import kotlinx.serialization.Serializable
 import sequeniakmp.composeapp.generated.resources.Res
@@ -23,7 +22,7 @@ sealed interface Route : NavKey {
     data object MoviesRoute : Route
 
     @Serializable
-    data class MovieDetailsRoute(val movie: Movie) : Route
+    data class MovieDetailsRoute(val movieId: Long) : Route
 
     @Serializable
     data object SettingsRoute : Route

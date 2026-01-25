@@ -48,8 +48,7 @@ class MoviesViewModel(
     }
 
     fun onMovieClick(id: Long) {
-        val movie = movies.firstOrNull { movie -> movie.id == id } ?: return
-        viewModelScope.launch { sendShowMovieEvent(movie) }
+        viewModelScope.launch { sendShowMovieEvent(id) }
     }
 
     fun onGenreClick(genre: String) {
@@ -123,7 +122,9 @@ class MoviesViewModel(
         }
     }
 
-    private fun handleLoadedMovies(loadedMovies: List<Movie>) {
+    private suspend fun handleLoadedMovies(loadedMovies: List<Movie>) {
+        moviesModel.saveMovies(loadedMovies)
+
         val genres = loadedMovies
             .mapNotNull { movie -> movie.genres }
             .flatten()
@@ -171,8 +172,8 @@ class MoviesViewModel(
         mutableScreenState.value = ScreenState.ErrorState(errorResult)
     }
 
-    private suspend fun sendShowMovieEvent(movie: Movie) {
-        screenEventChannel.send(ScreenEvent.ShowMovieEvent(movie))
+    private suspend fun sendShowMovieEvent(movieId: Long) {
+        screenEventChannel.send(ScreenEvent.ShowMovieEvent(movieId))
     }
 
     private suspend fun sendShowFavoritesEvent() {

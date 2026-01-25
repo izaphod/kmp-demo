@@ -28,6 +28,7 @@ import com.sequenia.kmp.presentation.screens.settings.SettingsScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun BottomNavigationRoot(
@@ -53,7 +54,7 @@ fun BottomNavigationRoot(
                     }
                     entry<Route.MovieDetailsRoute> { route ->
                         MovieDetailsScreen(
-                            movie = route.movie,
+                            viewModel = koinViewModel { parametersOf(route.movieId) },
                             navigator = bottomNavNavigator,
                             modifier = Modifier.background(color = surface)
                         )

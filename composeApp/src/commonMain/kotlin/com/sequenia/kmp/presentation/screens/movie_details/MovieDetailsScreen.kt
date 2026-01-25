@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sequenia.kmp.domain.entities.movie.Movie
 import com.sequenia.kmp.presentation.compose.component.app_bar.TopAppBarComponent
 import com.sequenia.kmp.presentation.compose.component.image.MoviePosterComponent
@@ -33,10 +34,11 @@ import kotlin.math.round
 
 @Composable
 fun MovieDetailsScreen(
-    movie: Movie,
+    viewModel: MovieDetailsViewModel,
     navigator: Navigator,
     modifier: Modifier = Modifier
 ) {
+    val movie = viewModel.movieStateFlow.collectAsStateWithLifecycle().value ?: return
     val horizontalSides = WindowInsetsSides.Horizontal
     val insetsCutoutHorizontal = WindowInsets.displayCutout.only(horizontalSides)
     val insetsNavBarsHorizontal = WindowInsets.navigationBars.only(horizontalSides)

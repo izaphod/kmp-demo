@@ -6,4 +6,6 @@ import com.sequenia.kmp.domain.results.ExecutionResult
 interface MoviesModel {
 
     suspend fun loadMovies(): ExecutionResult<List<Movie>>
+
+    suspend fun saveMovies(movies: List<Movie>)
 }

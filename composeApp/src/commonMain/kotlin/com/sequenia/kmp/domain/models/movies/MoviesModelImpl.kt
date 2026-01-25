@@ -11,4 +11,8 @@ class MoviesModelImpl(
     override suspend fun loadMovies(): ExecutionResult<List<Movie>> {
         return moviesRepository.loadMovies()
     }
+
+    override suspend fun saveMovies(movies: List<Movie>) {
+        moviesRepository.saveLocalMovies(movies)
+    }
 }

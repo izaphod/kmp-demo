@@ -121,7 +121,7 @@ fun MoviesScreen(
             when (event) {
                 is MoviesScreenEvent.ShowMovieEvent -> {
                     val bottomNavNavigator = commonNavigator.bottomNavNavigator
-                    bottomNavNavigator.navigate(Route.MovieDetailsRoute(event.movie))
+                    bottomNavNavigator.navigate(Route.MovieDetailsRoute(event.movieId))
                 }
 
                 is MoviesScreenEvent.ShowFavoritesEvent -> {
