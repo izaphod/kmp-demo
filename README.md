@@ -3,7 +3,8 @@
 ### Android
 
 1. Android Studio Otter 3 Feature Drop (2025.2.3) или новее для поддержки AGP 9.0.0.
-2. Java Virtual Machine (JVM) version 17 или новее для поддержки Gradle daemon.
+2. Kotlin Multiplatform plugin для IntelliJ IDEA и Android Studio
+3. JVM v.17 или новее для поддержки Gradle daemon.
 
 ### iOS
 1. macOS 15.0 (Sequoia) или новее для запуска Xcode и сборки iOS-приложения
