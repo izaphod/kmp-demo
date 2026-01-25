@@ -28,7 +28,7 @@ import com.sequenia.kmp.presentation.navigation.Navigator
 import org.jetbrains.compose.resources.stringResource
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.movie_rating_source
-import sequeniakmp.composeapp.generated.resources.year
+import sequeniakmp.composeapp.generated.resources.movie_year
 import kotlin.math.round
 
 @Composable
@@ -127,7 +127,7 @@ private fun formatMovieDetails(movie: Movie): String {
     val year = movie.year?.toString()
     val formattedYear = when {
         year.isNullOrBlank() -> null
-        else -> "$year ${stringResource(Res.string.year)}"
+        else -> stringResource(Res.string.movie_year, year)
     }
 
     return listOfNotNull(genres, formattedYear)
