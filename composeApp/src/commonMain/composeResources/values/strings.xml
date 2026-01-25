@@ -1,4 +1,5 @@
 <resources>
     <string name="movie_rating_source">КиноПоиск</string>
     <string name="movie_year">%1$s год</string>
+    <string name="platform_name">Платформа: %1$s</string>
 </resources>

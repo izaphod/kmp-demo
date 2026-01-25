@@ -1,23 +1,29 @@
 package com.sequenia.kmp.presentation.screens.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sequenia.kmp.domain.entities.settings.GenresSelectionMode
+import com.sequenia.kmp.getPlatform
 import com.sequenia.kmp.presentation.compose.component.app_bar.TopAppBarComponent
 import com.sequenia.kmp.presentation.compose.component.button.CheckboxComponent
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
@@ -25,6 +31,7 @@ import com.sequenia.kmp.presentation.extensions.defineLabel
 import org.jetbrains.compose.resources.stringResource
 import ru.sequenia.test.ui.screens.settings.SettingsViewModel
 import sequeniakmp.composeapp.generated.resources.Res
+import sequeniakmp.composeapp.generated.resources.platform_name
 import sequeniakmp.composeapp.generated.resources.title_genres_selection_settings
 import sequeniakmp.composeapp.generated.resources.title_settings
 
@@ -47,21 +54,37 @@ fun SettingsScreen(
     val insetsCutoutHorizontal = WindowInsets.displayCutout.only(horizontalSides)
     val insetsNavBarsHorizontal = WindowInsets.navigationBars.only(horizontalSides)
 
-    Column(modifier = modifier) {
+    Column(modifier = modifier.fillMaxHeight()) {
         TopAppBarComponent(
             topAppBarStyle = AppTheme.topAppBarSystem.rootTopAppBarStyle,
             title = stringResource(Res.string.title_settings),
             modifier = Modifier.fillMaxWidth()
         )
 
-        GenreSelectionModeSettingsComponent(
-            genresSelectionModeState = genresSelectionModeState,
-            onGenresSelectionModeChanged = viewModel::onGenresSelectionModeChanged,
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(insets = insetsCutoutHorizontal)
-                .windowInsetsPadding(insets = insetsNavBarsHorizontal)
-        )
+                .weight(weight = 1F)
+                .verticalScroll(state = rememberScrollState())
+        ) {
+            GenreSelectionModeSettingsComponent(
+                genresSelectionModeState = genresSelectionModeState,
+                onGenresSelectionModeChanged = viewModel::onGenresSelectionModeChanged,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(insets = insetsCutoutHorizontal)
+                    .windowInsetsPadding(insets = insetsNavBarsHorizontal)
+            )
+
+            Spacer(modifier = Modifier.weight(weight = 1F))
+
+            Text(
+                text = stringResource(Res.string.platform_name, getPlatform().name),
+                style = AppTheme.typographySystem.commonCheckboxLabel,
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .padding(all = 16.dp)
+            )
+        }
     }
 }
 

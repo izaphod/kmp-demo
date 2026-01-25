@@ -1,4 +1,4 @@
-package com.sequenia.kmp
+package com.sequenia.kmp.presentation
 
 import android.graphics.Color
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.sequenia.kmp.presentation.App
 
 private const val SCRIM_COLOR = Color.TRANSPARENT
 

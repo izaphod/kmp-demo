@@ -1,6 +1,5 @@
-package com.sequenia.kmp
+package com.sequenia.kmp.presentation
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.sequenia.kmp.presentation.App
 
 fun MainViewController() = ComposeUIViewController { App() }
