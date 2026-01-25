@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.offset
 import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sequenia.kmp.domain.entities.movie.Movie
+import com.sequenia.kmp.domain.results.ExecutionResult
 import com.sequenia.kmp.presentation.compose.component.app_bar.TopAppBarComponent
 import com.sequenia.kmp.presentation.compose.component.image.MoviePosterComponent
 import com.sequenia.kmp.presentation.compose.entities.constants.ContentTypes
@@ -61,9 +62,8 @@ import com.sequenia.kmp.presentation.navigation.CommonNavigator
 import com.sequenia.kmp.presentation.navigation.routes.Route
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import com.sequenia.kmp.domain.results.ExecutionResult
+import org.jetbrains.compose.resources.vectorResource
 import ru.sequenia.test.ui.compose.component.message.ErrorMessageComponent
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.button_repeat
@@ -149,8 +149,8 @@ fun MoviesScreen(
                         IconButton(
                             onClick = viewModel::onFavoritesClick
                         ) {
-                            val icon = painterResource(Res.drawable.ic_outline_favorite_24)
-                            Icon(painter = icon, contentDescription = null)
+                            val icon = vectorResource(Res.drawable.ic_outline_favorite_24)
+                            Icon(imageVector = icon, contentDescription = null)
                         }
                     }
                 },

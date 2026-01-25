@@ -14,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
@@ -26,8 +25,8 @@ import com.sequenia.kmp.presentation.navigation.toEntries
 import com.sequenia.kmp.presentation.screens.movie_details.MovieDetailsScreen
 import com.sequenia.kmp.presentation.screens.movies.MoviesScreen
 import com.sequenia.kmp.presentation.screens.settings.SettingsScreen
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -98,7 +97,7 @@ private fun BottomNavigationBarComponent(
                 onClick = { onSelectKey(topLevelDestination) },
                 icon = {
                     Icon(
-                        painter = painterResource(navItem.iconResource),
+                        imageVector = vectorResource(navItem.iconResource),
                         contentDescription = label,
                     )
                 },

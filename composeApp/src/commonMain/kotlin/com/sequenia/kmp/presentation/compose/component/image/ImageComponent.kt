@@ -10,7 +10,7 @@ import coil3.compose.SubcomposeAsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.sequenia.kmp.presentation.compose.entities.settings.ImageComponentSettings
-import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 fun ImageComponent(
@@ -31,9 +31,9 @@ fun ImageComponent(
         alignment = alignment,
         loading = {
             onImageLoading?.invoke()
-            settings.placeholderDrawableResource?.let { res ->
+            settings.placeholderDrawableResource?.let { resource ->
                 Image(
-                    painter = painterResource(res),
+                    imageVector = vectorResource(resource),
                     contentDescription = null,
                     modifier = modifier,
                     contentScale = contentScale,
@@ -43,9 +43,9 @@ fun ImageComponent(
         },
         error = {
             onImageLoadingError?.invoke()
-            settings.errorDrawableResource?.let { res ->
+            settings.errorDrawableResource?.let { resource ->
                 Image(
-                    painter = painterResource(res),
+                    imageVector = vectorResource(resource),
                     contentDescription = null,
                     modifier = modifier,
                     contentScale = contentScale,

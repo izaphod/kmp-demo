@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.ic_round_arrow_back_24
 
@@ -27,7 +27,7 @@ data class TopAppBarStyle(
     val heightInDp: Dp,
     val titleStyle: TextStyle,
     val colors: TopAppBarColors,
-    val navigationIcon: Painter?,
+    val navigationIcon: ImageVector?,
 ) {
     companion object {
         val Unspecified = TopAppBarStyle(
@@ -78,7 +78,7 @@ fun createTopAppBarSystem(
             heightInDp = heightInDp,
             titleStyle = titleStyle,
             colors = colors,
-            navigationIcon = painterResource(Res.drawable.ic_round_arrow_back_24)
+            navigationIcon = vectorResource(Res.drawable.ic_round_arrow_back_24)
         ),
     )
 }

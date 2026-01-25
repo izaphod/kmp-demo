@@ -49,7 +49,7 @@ fun TopAppBarComponent(
                     LocalMinimumInteractiveComponentSize provides Dp.Unspecified
                 ) {
                     IconButton(onClick = onBackClick) {
-                        Icon(painter = navigationIcon, contentDescription = null)
+                        Icon(imageVector = navigationIcon, contentDescription = null)
                     }
                 }
             }
