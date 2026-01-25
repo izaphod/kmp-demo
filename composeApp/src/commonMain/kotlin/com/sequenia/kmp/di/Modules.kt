@@ -4,6 +4,7 @@ import com.sequenia.kmp.data.data_sources.movies.MoviesDataSourceLocal
 import com.sequenia.kmp.data.data_sources.movies.MoviesDataSourceLocalImpl
 import com.sequenia.kmp.data.data_sources.movies.MoviesDataSourceRemote
 import com.sequenia.kmp.data.data_sources.movies.MoviesDataSourceRemoteImpl
+import com.sequenia.kmp.data.data_store_preferences.settings.SettingsDataStorePreferences
 import com.sequenia.kmp.data.database.MoviesDatabase
 import com.sequenia.kmp.data.database.getRoomDatabase
 import com.sequenia.kmp.data.network.ApiRequestExecutor
@@ -81,6 +82,12 @@ val databasesModule = module {
     }
 }
 
+val dataStoresModule = module {
+    single {
+        SettingsDataStorePreferences(settingsDataStore = get())
+    }
+}
+
 val dataSourcesModule = module {
     factory<MoviesDataSourceRemote> {
         MoviesDataSourceRemoteImpl(httpClient = get())
@@ -101,7 +108,9 @@ val repositoriesModule = module {
     }
 
     single<SettingsRepository> {
-        SettingsRepositoryImpl()
+        SettingsRepositoryImpl(
+            settingsDataStorePreferences = get()
+        )
     }
 }
 

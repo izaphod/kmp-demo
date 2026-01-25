@@ -6,8 +6,9 @@ fun appKoinConfiguration() = koinConfiguration {
     modules(
         platformModule,
         networkModule,
-        dataSourcesModule,
         databasesModule,
+        dataStoresModule,
+        dataSourcesModule,
         repositoriesModule,
         modelsModule,
         viewModelsModule,

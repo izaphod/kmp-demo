@@ -1,24 +1,23 @@
 package com.sequenia.kmp.data.repositories.settings
 
+import com.sequenia.kmp.data.data_store_preferences.settings.SettingsDataStorePreferences
 import com.sequenia.kmp.domain.entities.settings.GenresSelectionMode
 import com.sequenia.kmp.domain.repositories.settings.SettingsRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
-class SettingsRepositoryImpl() : SettingsRepository {
-
-    private val selectionModeStateFlow = MutableStateFlow(GenresSelectionMode.MULTIPLE)
+class SettingsRepositoryImpl(
+    private val settingsDataStorePreferences: SettingsDataStorePreferences
+) : SettingsRepository {
 
     override fun subscribeToGenresSelectionMode(): Flow<GenresSelectionMode?> {
-        return selectionModeStateFlow.asStateFlow()
+        return settingsDataStorePreferences.subscribeToGenresSelectionMode()
     }
 
     override suspend fun getGenresSelectionMode(): GenresSelectionMode? {
-        return selectionModeStateFlow.value
+        return settingsDataStorePreferences.getGenresSelectionMode()
     }
 
     override suspend fun saveGenresSelectionMode(mode: GenresSelectionMode) {
-        selectionModeStateFlow.value = mode
+        settingsDataStorePreferences.saveGenresSelectionMode(mode)
     }
 }

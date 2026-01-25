@@ -10,6 +10,7 @@ ktor = "3.4.0"
 sqlite = "2.6.2"
 room = "2.8.4"
 ksp = "2.3.4"
+datastore = "1.2.0"
 kotlinx-serialization = "1.10.0"
 kotlinx-coroutines = "1.10.2"
 coil = "3.3.0"
@@ -53,6 +54,8 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
