@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sequenia.kmp.presentation.navigation
+package com.sequenia.kmp.presentation.navigation.state
 
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
@@ -33,72 +33,56 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.savedstate.serialization.SavedStateConfiguration
 
 /**
- * Create a navigation state that persists config changes and process death.
+ * Create a simple navigation state (single stack, no sub-stacks) that persists config changes and process death.
+ * Use this for top-level navigation where you don't need hierarchical navigation.
  */
 @Composable
-fun rememberNavigationState(
+fun rememberSimpleNavigationState(
     startKey: NavKey,
-    topLevelKeys: Set<NavKey>,
     configuration: SavedStateConfiguration
-): NavigationState {
-    val topLevelStack = rememberNavBackStack(configuration, startKey)
-    val subStacks = topLevelKeys.associateWith { key -> rememberNavBackStack(configuration, key) }
+): SingleStackNavigationState {
+    val backStack = rememberNavBackStack(configuration, startKey)
 
-    return remember(startKey, topLevelKeys) {
-        NavigationState(
+    return remember(startKey) {
+        SingleStackNavigationState(
             startKey = startKey,
-            topLevelStack = topLevelStack,
-            subStacks = subStacks,
+            backStack = backStack,
         )
     }
 }
 
 /**
- * State holder for navigation state.
+ * Simple navigation state holder with a single back stack.
+ * No sub-stacks - just a linear navigation stack.
  *
  * @param startKey - the starting navigation key. The user will exit the app through this key.
- * @param topLevelStack - the top level back stack. It holds only top level keys.
- * @param subStacks - the back stacks for each top level key
+ * @param backStack - the back stack holding navigation keys.
  */
-class NavigationState(
+class SingleStackNavigationState(
     val startKey: NavKey,
-    val topLevelStack: NavBackStack<NavKey>,
-    val subStacks: Map<NavKey, NavBackStack<NavKey>>,
+    val backStack: NavBackStack<NavKey>,
 ) {
-    val currentTopLevelKey: NavKey by derivedStateOf { topLevelStack.last() }
-
-    val topLevelKeys
-        get() = subStacks.keys
-
     @get:VisibleForTesting
-    val currentSubStack: NavBackStack<NavKey>
-        get() = subStacks[currentTopLevelKey]
-            ?: error("Sub stack for $currentTopLevelKey does not exist")
-
-    @get:VisibleForTesting
-    val currentKey: NavKey by derivedStateOf { currentSubStack.last() }
+    val currentKey: NavKey by derivedStateOf { backStack.last() }
 }
 
 /**
- * Convert NavigationState into NavEntries.
+ * Convert SimpleNavigationState into NavEntries.
  */
 @Composable
-fun NavigationState.toEntries(
+fun SingleStackNavigationState.toEntries(
     entryProvider: (NavKey) -> NavEntry<NavKey>,
 ): SnapshotStateList<NavEntry<NavKey>> {
-    val decoratedEntries = subStacks.mapValues { (_, stack) ->
-        val decorators = listOf(
-            rememberSaveableStateHolderNavEntryDecorator<NavKey>(),
-            rememberViewModelStoreNavEntryDecorator(),
-        )
-        rememberDecoratedNavEntries(
-            backStack = stack,
-            entryDecorators = decorators,
-            entryProvider = entryProvider,
-        )
-    }
+    val decorators = listOf(
+        rememberSaveableStateHolderNavEntryDecorator<NavKey>(),
+        rememberViewModelStoreNavEntryDecorator(),
+    )
+    
+    val decoratedEntries = rememberDecoratedNavEntries(
+        backStack = backStack,
+        entryDecorators = decorators,
+        entryProvider = entryProvider,
+    )
 
-    return topLevelStack
-        .flatMap { decoratedEntries[it] ?: emptyList() }
-        .toMutableStateList()
+    return decoratedEntries.toMutableStateList()
 }

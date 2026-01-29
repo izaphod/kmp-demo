@@ -1,5 +1,6 @@
-package com.sequenia.kmp.presentation.navigation
+package com.sequenia.kmp.presentation.navigation.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -10,12 +11,18 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
+import com.sequenia.kmp.presentation.navigation.navigator.CommonNavigator
 import com.sequenia.kmp.presentation.navigation.bottom.BottomNavigationRoot
 import com.sequenia.kmp.presentation.navigation.routes.BOTTOM_NAV_TOP_LEVEL_DESTINATIONS
 import com.sequenia.kmp.presentation.navigation.routes.Route
+import com.sequenia.kmp.presentation.navigation.state.rememberMultiStackNavigationState
+import com.sequenia.kmp.presentation.navigation.state.rememberSimpleNavigationState
+import com.sequenia.kmp.presentation.navigation.state.toEntries
 import com.sequenia.kmp.presentation.screens.favorites.FavoritesScreen
+import com.sequenia.kmp.presentation.screens.settings.SettingsScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
+import org.koin.compose.viewmodel.koinViewModel
 
 val savedStateConfiguration = SavedStateConfiguration {
     serializersModule = SerializersModule {
@@ -48,13 +55,12 @@ val savedStateConfiguration = SavedStateConfiguration {
 fun MainNavigationRoot(modifier: Modifier = Modifier) {
     val surface = AppTheme.colorSystem.surface
 
-    val mainNavState = rememberNavigationState(
+    val mainNavState = rememberSimpleNavigationState(
         startKey = Route.BottomNavigationRoute,
-        topLevelKeys = setOf(Route.BottomNavigationRoute),
         configuration = savedStateConfiguration
     )
     @Suppress("USELESS_CAST")
-    val bottomNavState = rememberNavigationState(
+    val bottomNavState = rememberMultiStackNavigationState(
         startKey = Route.MoviesRoute,
         topLevelKeys = BOTTOM_NAV_TOP_LEVEL_DESTINATIONS.keys as Set<Route>,
         configuration = savedStateConfiguration
@@ -81,7 +87,18 @@ fun MainNavigationRoot(modifier: Modifier = Modifier) {
                         )
                     }
                     entry<Route.FavoritesRoute> {
-                        FavoritesScreen(navigator = mainNavigator)
+                        FavoritesScreen(
+                            navigator = mainNavigator,
+                            modifier = Modifier.background(color = surface)
+                        )
+                    }
+                    entry<Route.SettingsRoute> {
+                        SettingsScreen(
+                            viewModel = koinViewModel(),
+                            navigator = mainNavigator,
+                            isFullScreen = true,
+                            modifier = Modifier.background(color = surface)
+                        )
                     }
                 }
             ),

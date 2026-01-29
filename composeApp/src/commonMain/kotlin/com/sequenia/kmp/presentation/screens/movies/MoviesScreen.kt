@@ -58,7 +58,7 @@ import com.sequenia.kmp.presentation.compose.entities.constants.ContentTypes
 import com.sequenia.kmp.presentation.compose.extension.defineMessage
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
 import com.sequenia.kmp.presentation.entities.screen_data.movies.MoviesScreenData
-import com.sequenia.kmp.presentation.navigation.CommonNavigator
+import com.sequenia.kmp.presentation.navigation.navigator.CommonNavigator
 import com.sequenia.kmp.presentation.navigation.routes.Route
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

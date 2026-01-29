@@ -17,11 +17,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
-import com.sequenia.kmp.presentation.navigation.CommonNavigator
-import com.sequenia.kmp.presentation.navigation.NavigationState
+import com.sequenia.kmp.presentation.navigation.navigator.CommonNavigator
+import com.sequenia.kmp.presentation.navigation.state.MultiStackNavigationState
 import com.sequenia.kmp.presentation.navigation.routes.BOTTOM_NAV_TOP_LEVEL_DESTINATIONS
 import com.sequenia.kmp.presentation.navigation.routes.Route
-import com.sequenia.kmp.presentation.navigation.toEntries
+import com.sequenia.kmp.presentation.navigation.state.toEntries
 import com.sequenia.kmp.presentation.screens.movie_details.MovieDetailsScreen
 import com.sequenia.kmp.presentation.screens.movies.MoviesScreen
 import com.sequenia.kmp.presentation.screens.settings.SettingsScreen
@@ -32,7 +32,7 @@ import org.koin.core.parameter.parametersOf
 
 @Composable
 fun BottomNavigationRoot(
-    navigationState: NavigationState,
+    navigationState: MultiStackNavigationState,
     commonNavigator: CommonNavigator,
     modifier: Modifier = Modifier,
 ) {
@@ -62,6 +62,7 @@ fun BottomNavigationRoot(
                     entry<Route.SettingsRoute> {
                         SettingsScreen(
                             viewModel = koinViewModel(),
+                            navigator = bottomNavNavigator,
                             modifier = Modifier.background(color = surface)
                         )
                     }

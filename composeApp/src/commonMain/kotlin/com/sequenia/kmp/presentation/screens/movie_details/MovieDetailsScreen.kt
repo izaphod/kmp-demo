@@ -25,7 +25,7 @@ import com.sequenia.kmp.domain.entities.movie.Movie
 import com.sequenia.kmp.presentation.compose.component.app_bar.TopAppBarComponent
 import com.sequenia.kmp.presentation.compose.component.image.MoviePosterComponent
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
-import com.sequenia.kmp.presentation.navigation.Navigator
+import com.sequenia.kmp.presentation.navigation.navigator.Navigator
 import org.jetbrains.compose.resources.stringResource
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.movie_rating_source

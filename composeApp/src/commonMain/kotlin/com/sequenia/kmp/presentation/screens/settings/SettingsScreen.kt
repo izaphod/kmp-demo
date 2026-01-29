@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -28,6 +29,7 @@ import com.sequenia.kmp.presentation.compose.component.app_bar.TopAppBarComponen
 import com.sequenia.kmp.presentation.compose.component.button.CheckboxComponent
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
 import com.sequenia.kmp.presentation.extensions.defineLabel
+import com.sequenia.kmp.presentation.navigation.navigator.Navigator
 import org.jetbrains.compose.resources.stringResource
 import ru.sequenia.test.ui.screens.settings.SettingsViewModel
 import sequeniakmp.composeapp.generated.resources.Res
@@ -38,7 +40,9 @@ import sequeniakmp.composeapp.generated.resources.title_settings
 @Composable
 fun SettingsScreen(
     viewModel: SettingsViewModel,
-    modifier: Modifier = Modifier
+    navigator: Navigator,
+    modifier: Modifier = Modifier,
+    isFullScreen: Boolean = false,
 ) {
     val state = viewModel.screenStateFlow.collectAsStateWithLifecycle()
     val initialGenresSelectionMode = when (val screenState = state.value) {
@@ -54,10 +58,18 @@ fun SettingsScreen(
     val insetsCutoutHorizontal = WindowInsets.displayCutout.only(horizontalSides)
     val insetsNavBarsHorizontal = WindowInsets.navigationBars.only(horizontalSides)
 
-    Column(modifier = modifier.fillMaxHeight()) {
+    Column(
+        modifier = modifier
+            .fillMaxHeight()
+    ) {
         TopAppBarComponent(
-            topAppBarStyle = AppTheme.topAppBarSystem.rootTopAppBarStyle,
+            topAppBarStyle = if (isFullScreen) {
+                AppTheme.topAppBarSystem.childTopAppBarStyle
+            } else {
+                AppTheme.topAppBarSystem.rootTopAppBarStyle
+            },
             title = stringResource(Res.string.title_settings),
+            onBackClick = { navigator.goBack() },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -83,6 +95,7 @@ fun SettingsScreen(
                 modifier = Modifier
                     .align(alignment = Alignment.CenterHorizontally)
                     .padding(all = 16.dp)
+                    .then(if (isFullScreen) Modifier.navigationBarsPadding() else Modifier)
             )
         }
     }
