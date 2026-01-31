@@ -40,61 +40,56 @@ fun FavoritesScreen(
                 .background(color = AppTheme.colorSystem.surface)
         )
 
-        Button(
-            onClick = {
-                navigator.navigate(key = Route.WebViewRoute)
-            },
-            colors = ButtonDefaults.filledTonalButtonColors().copy(
-                containerColor = AppTheme.colorSystem.fabContainerColor,
-                contentColor = AppTheme.colorSystem.fabContentColor
-            ),
+        FilledButtonComponent(
+            text = "WebView",
+            onClick = { navigator.navigate(key = Route.WebViewRoute) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp)
-        ) {
-            Text(
-                text = "WebView"
-            )
-        }
+        )
 
-        Button(
-            onClick = {
-                navigator.navigate(key = Route.FavoritesRoute)
-            },
-            colors = ButtonDefaults.filledTonalButtonColors().copy(
-                containerColor = AppTheme.colorSystem.fabContainerColor,
-                contentColor = AppTheme.colorSystem.fabContentColor
-            ),
+        FilledButtonComponent(
+            text = "Еще один экран Избранное",
+            onClick = { navigator.navigate(key = Route.FavoritesRoute) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp)
-        ) {
-            Text(
-                text = "Еще один экран Избранное"
-            )
-        }
+        )
 
-        Button(
-            onClick = {
+        FilledButtonComponent(
+            text = "Настройки с popUpTo в начало",
+            onClick = { 
                 navigator.navigate(
                     key = Route.SettingsRoute,
                     popUpTo = Route.BottomNavigationRoute
-                )
+                ) 
             },
-            colors = ButtonDefaults.filledTonalButtonColors().copy(
-                containerColor = AppTheme.colorSystem.fabContainerColor,
-                contentColor = AppTheme.colorSystem.fabContentColor
-            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(all = 16.dp)
                 .navigationBarsPadding()
-        ) {
-            Text(
-                text = "Настройки с popUpTo в начало"
-            )
-        }
+        )
+    }
+}
+
+@Composable
+private fun FilledButtonComponent(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.filledTonalButtonColors().copy(
+            containerColor = AppTheme.colorSystem.fabContainerColor,
+            contentColor = AppTheme.colorSystem.fabContentColor
+        ),
+        modifier = modifier
+    ) {
+        Text(
+            text = text
+        )
     }
 }
