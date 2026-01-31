@@ -45,6 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
@@ -60,10 +61,13 @@ import com.sequenia.kmp.presentation.compose.theme.AppTheme
 import com.sequenia.kmp.presentation.entities.screen_data.movies.MoviesScreenData
 import com.sequenia.kmp.presentation.navigation.navigator.CommonNavigator
 import com.sequenia.kmp.presentation.navigation.routes.Route
+import com.sequenia.kmp.presentation.compose_preview.PreviewApp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import ru.sequenia.test.ui.compose.component.message.ErrorMessageComponent
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.button_repeat
@@ -348,5 +352,16 @@ private fun MoviePreviewComponent(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun SettingsScreenPreview() {
+    PreviewApp {
+        MoviesScreen(
+            viewModel = koinViewModel(),
+            commonNavigator = koinInject()
+        )
     }
 }

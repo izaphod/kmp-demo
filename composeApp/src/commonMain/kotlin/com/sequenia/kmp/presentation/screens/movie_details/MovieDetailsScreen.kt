@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sequenia.kmp.domain.entities.movie.Movie
@@ -26,7 +27,11 @@ import com.sequenia.kmp.presentation.compose.component.app_bar.TopAppBarComponen
 import com.sequenia.kmp.presentation.compose.component.image.MoviePosterComponent
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
 import com.sequenia.kmp.presentation.navigation.navigator.Navigator
+import com.sequenia.kmp.presentation.compose_preview.PreviewApp
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.movie_rating_source
 import sequeniakmp.composeapp.generated.resources.movie_year
@@ -139,4 +144,15 @@ private fun formatMovieDetails(movie: Movie): String {
 
 private fun formatMovieRating(rating: Float): String {
     return (round(rating * 10) / 10).toString()
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun MovieDetailsScreenPreview() {
+    PreviewApp {
+        MovieDetailsScreen(
+            viewModel = koinViewModel { parametersOf(125L) },
+            navigator = koinInject(),
+        )
+    }
 }

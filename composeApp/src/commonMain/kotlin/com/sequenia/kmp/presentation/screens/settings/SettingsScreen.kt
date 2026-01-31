@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sequenia.kmp.domain.entities.settings.GenresSelectionMode
@@ -30,7 +31,10 @@ import com.sequenia.kmp.presentation.compose.component.button.CheckboxComponent
 import com.sequenia.kmp.presentation.compose.theme.AppTheme
 import com.sequenia.kmp.presentation.extensions.defineLabel
 import com.sequenia.kmp.presentation.navigation.navigator.Navigator
+import com.sequenia.kmp.presentation.compose_preview.PreviewApp
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import ru.sequenia.test.ui.screens.settings.SettingsViewModel
 import sequeniakmp.composeapp.generated.resources.Res
 import sequeniakmp.composeapp.generated.resources.platform_name
@@ -132,5 +136,16 @@ private fun GenreSelectionModeSettingsComponent(
                 modifier = checkboxModifier
             )
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun SettingsScreenPreview() {
+    PreviewApp {
+        SettingsScreen(
+            viewModel = koinViewModel(),
+            navigator = koinInject(),
+        )
     }
 }
