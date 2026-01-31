@@ -26,6 +26,9 @@ sealed interface Route : NavKey {
 
     @Serializable
     data object SettingsRoute : Route
+
+    @Serializable
+    data object WebViewRoute : Route
 }
 
 val BOTTOM_NAV_TOP_LEVEL_DESTINATIONS: Map<Route, BottomNavItem> = mapOf(

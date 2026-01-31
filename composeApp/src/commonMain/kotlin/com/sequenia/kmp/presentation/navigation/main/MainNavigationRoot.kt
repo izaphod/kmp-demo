@@ -20,6 +20,7 @@ import com.sequenia.kmp.presentation.navigation.state.rememberSimpleNavigationSt
 import com.sequenia.kmp.presentation.navigation.state.toEntries
 import com.sequenia.kmp.presentation.screens.favorites.FavoritesScreen
 import com.sequenia.kmp.presentation.screens.settings.SettingsScreen
+import com.sequenia.kmp.presentation.screens.webview.WebViewScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import org.koin.compose.viewmodel.koinViewModel
@@ -46,6 +47,10 @@ val savedStateConfiguration = SavedStateConfiguration {
             subclass(
                 subclass = Route.MovieDetailsRoute::class,
                 serializer = Route.MovieDetailsRoute.serializer()
+            )
+            subclass(
+                subclass = Route.WebViewRoute::class,
+                serializer = Route.WebViewRoute.serializer()
             )
         }
     }
@@ -97,6 +102,12 @@ fun MainNavigationRoot(modifier: Modifier = Modifier) {
                             viewModel = koinViewModel(),
                             navigator = mainNavigator,
                             isFullScreen = true,
+                            modifier = Modifier.background(color = surface)
+                        )
+                    }
+                    entry<Route.WebViewRoute> {
+                        WebViewScreen(
+                            navigator = mainNavigator,
                             modifier = Modifier.background(color = surface)
                         )
                     }

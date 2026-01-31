@@ -42,6 +42,24 @@ fun FavoritesScreen(
 
         Button(
             onClick = {
+                navigator.navigate(key = Route.WebViewRoute)
+            },
+            colors = ButtonDefaults.filledTonalButtonColors().copy(
+                containerColor = AppTheme.colorSystem.fabContainerColor,
+                contentColor = AppTheme.colorSystem.fabContentColor
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp)
+        ) {
+            Text(
+                text = "WebView"
+            )
+        }
+
+        Button(
+            onClick = {
                 navigator.navigate(key = Route.FavoritesRoute)
             },
             colors = ButtonDefaults.filledTonalButtonColors().copy(
