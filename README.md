@@ -15,11 +15,10 @@
 
 ### Core
 
-- Kotlin 2.3.0
 - Kotlin Multiplatform
 - Compose Multiplatform
 - Kotlin Serialization
-- kotlin Coroutines
+- Kotlin Coroutines
 
 ### UI & Navigation
 
