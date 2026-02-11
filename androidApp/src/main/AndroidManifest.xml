@@ -11,7 +11,7 @@
 
         <activity
             android:exported="true"
-            android:name="com.sequenia.kmp.MainActivity">
+            android:name="com.sequenia.kmp.presentation.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

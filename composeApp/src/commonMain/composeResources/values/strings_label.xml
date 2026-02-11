@@ -1,0 +1,4 @@
+<resources>
+    <string name="label_multiple_selection_mode">Множественный выбор</string>
+    <string name="label_single_selection_mode">Единичный выбор</string>
+</resources>
